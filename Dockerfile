@@ -1,8 +1,7 @@
 FROM node:22-alpine
 WORKDIR /app
 COPY frontend/package*.json ./frontend/
-RUN cd frontend && npm install
+COPY frontend/prisma/ ./frontend/prisma/
+RUN cd frontend && npm install --ignore-scripts
 COPY frontend/ ./frontend/
 RUN cd frontend && npm run build
-EXPOSE 3000
-CMD ["npm", "--prefix", "frontend", "run", "start"]
